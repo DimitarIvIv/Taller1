@@ -15,27 +15,31 @@ public final class Edificio {
      * @throws IllegalArgumentException si el nombre está en blanco o el array es {@code null}
      */
     public Edificio(String nombre, Aula... aulas) {
-        // TODO 4: valida los dos parámetros y guarda el estado.
-        throw new UnsupportedOperationException("TODO 4: constructor de Edificio");
+        if (nombre == null || nombre.isBlank()) {
+            throw new IllegalArgumentException("Nombre de edificio no válido");
+        } else if (aulas == null) {
+            throw new IllegalArgumentException("Array de aulas no válido");
+        }
+        this.nombre = nombre;
+        this.aulas = aulas;
     }
 
     public String nombre() {
-        // TODO 4
-        throw new UnsupportedOperationException("TODO 4: Edificio.nombre");
+        return nombre;
     }
 
     /** Suma de la capacidad de las aulas que no están ocupadas. */
     public int plazasLibres() {
-        // TODO 4
-        throw new UnsupportedOperationException("TODO 4: Edificio.plazasLibres");
+        int total = 0;
+        for (Aula aula : aulas) {
+            if (aula.estaLibre()) {
+                total += aula.capacidad();
+            }
+        }
+        return total;
     }
 
-    /**
-     * Ya escrito: por ejemplo {@code Anselm Turmeda: 3 aulas, 160 plazas libres}.
-     *
-     * <p>No lo toques. Está aquí para que veas que un método del todo puede contestar preguntas
-     * sobre las partes sin dejar que nadie de fuera llegue a ellas.
-     */
+
     public String resumen() {
         return nombre + ": " + aulas.length + " aulas, " + plazasLibres() + " plazas libres";
     }

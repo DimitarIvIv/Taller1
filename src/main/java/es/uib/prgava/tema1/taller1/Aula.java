@@ -8,10 +8,10 @@ package es.uib.prgava.tema1.taller1;
  */
 public class Aula implements Reservable {
 
-    // TODO 2: declara aquí el atributo de clase que cuenta las aulas creadas.
+    private static int AulasCreadas = 0;
 
     private final CodigoAula codigo;
-    private int capacidad;
+    private final int capacidad;
     private boolean ocupada;
 
     /**
@@ -19,52 +19,52 @@ public class Aula implements Reservable {
      *
      * @throws IllegalArgumentException si el código es {@code null} o la capacidad no es positiva
      */
+    // Utilizado IA para escribir rápidamente el constructor.
     public Aula(CodigoAula codigo, int capacidad) {
-        // TODO 2: valida los dos parámetros, inicializa el estado e incrementa el contador.
-        throw new UnsupportedOperationException("TODO 2: constructor de Aula");
+        if (codigo == null) {
+            throw new IllegalArgumentException("Código de aula no válido");
+        } else if (capacidad <= 0) {
+            throw new IllegalArgumentException("Capacidad no válida: " + capacidad);
+        }
+        this.codigo = codigo;
+        this.capacidad = capacidad;
+        this.ocupada = false;
+        AulasCreadas++;
     }
 
     /** Método de clase: cuántas aulas se han construido desde que arrancó el programa. */
     public static int aulasCreadas() {
-        // TODO 2
-        throw new UnsupportedOperationException("TODO 2: Aula.aulasCreadas");
+        return AulasCreadas;
     }
 
     public CodigoAula codigo() {
-        // TODO 2
-        throw new UnsupportedOperationException("TODO 2: Aula.codigo");
+        return codigo;
     }
 
     public int capacidad() {
-        // TODO 2
-        throw new UnsupportedOperationException("TODO 2: Aula.capacidad");
+        return capacidad;
     }
 
     public boolean estaOcupada() {
-        // TODO 2
-        throw new UnsupportedOperationException("TODO 2: Aula.estaOcupada");
+        return ocupada;
     }
 
     public void ocupar() {
-        // TODO 2
-        throw new UnsupportedOperationException("TODO 2: Aula.ocupar");
+        ocupada = true;
     }
 
     public void liberar() {
-        // TODO 2
-        throw new UnsupportedOperationException("TODO 2: Aula.liberar");
+        ocupada = false;
     }
 
     @Override
     public boolean estaLibre() {
-        // TODO 3: lo que exige la interfaz Reservable.
-        throw new UnsupportedOperationException("TODO 3: Aula.estaLibre");
+        return !ocupada;
     }
 
     /** Por ejemplo {@code AT.2.17 (40 plazas, libre)} o {@code AT.1.3 (45 plazas, ocupada)}. */
     @Override
     public String toString() {
-        // TODO 2: reutiliza disponibilidad(), que te llega de la interfaz.
-        throw new UnsupportedOperationException("TODO 2: Aula.toString");
+        return codigo + " ("+ capacidad + " plazas, " + (ocupada ? "ocupada" : "libre") + ")";
     }
 }

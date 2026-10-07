@@ -10,16 +10,19 @@ public record CodigoAula(String edificio, int planta, int numero)
         implements Comparable<CodigoAula> {
 
     public CodigoAula {
-        // TODO 1: el edificio no puede ser null ni estar en blanco; la planta va de 0 a 5 y el
-        // número de 1 a 99. Lanza IllegalArgumentException nombrando el dato culpable y su
-        // valor, por ejemplo "Planta fuera de rango: 7".
+        if (edificio == null || edificio.isBlank()){
+            throw new IllegalArgumentException("Nombre de edificio no válido");
+        } else if (planta < 0 || planta > 5){
+            throw new IllegalArgumentException("Planta fuera de rango: " + planta);
+        } else if (numero < 1 || numero > 99){
+            throw new IllegalArgumentException("Número fuera de rango: " + numero);
+        }
     }
 
     /** Forma habitual de un código, por ejemplo {@code AT.2.17}. */
     @Override
     public String toString() {
-        // TODO 1: concatena edificio, planta y número separados por puntos.
-        throw new UnsupportedOperationException("TODO 1: CodigoAula.toString");
+        return edificio + "." + planta + "." + numero;
     }
 
     /**
@@ -29,3 +32,13 @@ public record CodigoAula(String edificio, int planta, int numero)
      */
     @Override
     public int compareTo(CodigoAula otro) {
+        int resultado = edificio.compareTo(otro.edificio);
+        if (resultado == 0){
+            resultado = Integer.compare(planta, otro.planta);
+            if (resultado == 0){
+                resultado = Integer.compare(numero, otro.numero);
+            }
+        }
+        return resultado;
+    }
+}

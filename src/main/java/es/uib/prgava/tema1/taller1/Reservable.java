@@ -17,17 +17,14 @@ public interface Reservable {
      * <p>Quien implemente la interfaz lo recibe sin escribirlo. No lo redefinas en {@link Aula}.
      */
     default String disponibilidad() {
-        // TODO 3
-        throw new UnsupportedOperationException("TODO 3: Reservable.disponibilidad");
+        return estaLibre() ? "libre" : "ocupada";
     }
-
-    /**
-     * Método de clase: imprime una línea por cada elemento que esté libre.
-     *
-     * <p>El parámetro es {@code Reservable} y no {@code Aula} a propósito.
-     */
+    // Imprime los que están libres.
     static void mostrarLibres(Reservable... cosas) {
-        // TODO 3
-        throw new UnsupportedOperationException("TODO 3: Reservable.mostrarLibres");
+        for (Reservable cosa : cosas) {
+            if (cosa.estaLibre()) {
+                System.out.println(cosa);
+            }
+        }
     }
 }
