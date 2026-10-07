@@ -29,7 +29,3 @@ public record CodigoAula(String edificio, int planta, int numero)
      */
     @Override
     public int compareTo(CodigoAula otro) {
-        // TODO 1
-        throw new UnsupportedOperationException("TODO 1: CodigoAula.compareTo");
-    }
-}
